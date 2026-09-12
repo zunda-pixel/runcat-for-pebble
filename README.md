@@ -39,7 +39,7 @@ pebble build
 
 ## Credits
 
-RunCat originally created by Takuto Nakamura (Kyome22).
+RunCat originally created by [Takuto Nakamura (Kyome22)](https://x.com/Kyomesuke).
 
 Original RunCat: https://kyome.io/runcat/
 
