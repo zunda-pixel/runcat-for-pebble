@@ -14,6 +14,15 @@ pebble install --phone <ip>           # install to a paired phone
 
 The generated package is `build/runcat-watchface.pbw`.
 
+## Releases
+
+Pushing a Git tag runs the GitHub Actions release workflow. It builds the watchface with Pebble SDK 4.33.1, generates release notes from the commits since the previous release, and attaches `build/runcat-watchface.pbw` to the GitHub Release.
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```
+
 This project is built with the latest active Pebble SDK. The watch must be updated to firmware 4.32 or later. Enable Pebble Health on the watch and in the companion app for BPM data.
 
 ```sh
