@@ -1,0 +1,35 @@
+{
+  "name": "runcat-wildcat",
+  "author": "RunCat Wildcat",
+  "version": "1.0.0",
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "RunCat Wildcat",
+    "uuid": "f9ba7290-a420-4b50-916c-1743c4981219",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "emery",
+      "diorite",
+      "flint",
+      "basalt",
+      "chalk",
+      "gabbro"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "capabilities": ["health"],
+    "resources": {
+      "media": [
+        {"type": "png", "name": "CAT_0", "file": "images/cat_0.png"},
+        {"type": "png", "name": "CAT_1", "file": "images/cat_1.png"},
+        {"type": "png", "name": "CAT_2", "file": "images/cat_2.png"},
+        {"type": "png", "name": "CAT_3", "file": "images/cat_3.png"},
+        {"type": "png", "name": "CAT_4", "file": "images/cat_4.png"}
+      ]
+    }
+  }
+}
