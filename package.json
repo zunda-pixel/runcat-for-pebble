@@ -1,12 +1,12 @@
 {
-  "name": "runcat-wildcat",
-  "author": "RunCat Wildcat",
+  "name": "runcat-for-pebble",
+  "author": "zunda-pixel",
   "version": "1.0.0",
   "keywords": ["pebble-app"],
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "RunCat Wildcat",
+    "displayName": "RunCat for Pebble",
     "uuid": "f9ba7290-a420-4b50-916c-1743c4981219",
     "sdkVersion": "3",
     "enableMultiJS": true,

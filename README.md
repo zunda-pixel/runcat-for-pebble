@@ -1,4 +1,4 @@
-# RunCat Wildcat
+# RunCat for Pebble
 
 A Pebble watch face where the official RunCat animation runs faster as your heart rate increases.
 
