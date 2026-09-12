@@ -43,8 +43,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ github.ref_name }}
         run: |
+          PBW_PATH="$(find build -maxdepth 1 -type f -name '*.pbw' -print -quit)"
+          test -n "$PBW_PATH"
           gh release create "$TAG_NAME" \
             --repo "$GITHUB_REPOSITORY" \
             --title "RunCat for Pebble $TAG_NAME" \
             --generate-notes \
-            build/runcat-watchface.pbw
+            "$PBW_PATH"
