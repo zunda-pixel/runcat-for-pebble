@@ -11,4 +11,5 @@ https://github.com/runcat-dev/RunCatResources
 The included RunCat resources are licensed under the Apache License, Version 2.0.
 The resources are included in the Pebble package as PNG files for use on supported Pebble displays.
 The original black cat pixels were recolored white for the black Pebble watchface background;
-the frame shapes and transparency were preserved.
+the frame shapes and transparency were preserved. The App Store icons are also derived
+from the same official RunCat PNG frame.
