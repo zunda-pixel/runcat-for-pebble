@@ -1,0 +1,23 @@
+RunCat for Pebble
+
+A playful watchface where the official RunCat runs faster as your heart rate rises.
+
+Features:
+- Animated RunCat running in place
+- Animation speed changes with your heart rate
+- Current time and date
+- Current heart rate display
+- Works when heart rate data is unavailable
+
+The cat keeps running at a default speed when heart rate data cannot be accessed.
+
+Designed primarily for Pebble Time 2 and compatible with supported rectangular Pebble watches.
+
+Credits:
+RunCat originally created by Takuto Nakamura (Kyome22):
+https://x.com/Kyomesuke
+
+RunCat resources:
+https://github.com/runcat-dev/RunCatResources
+
+Licensed under the Apache License 2.0.

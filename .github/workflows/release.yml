@@ -38,6 +38,41 @@ jobs:
       - name: Build PBW
         run: pebble build
 
+      - name: Refresh Pebble App Store token
+        id: pebble-token
+        env:
+          PEBBLE_FIREBASE_REFRESH_TOKEN: ${{ secrets.PEBBLE_FIREBASE_REFRESH_TOKEN }}
+          PEBBLE_FIREBASE_API_KEY: ${{ secrets.PEBBLE_FIREBASE_API_KEY }}
+        run: |
+          RESPONSE="$(curl --fail --silent --show-error \
+            --request POST \
+            --url "https://securetoken.googleapis.com/v1/token?key=${PEBBLE_FIREBASE_API_KEY}" \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'grant_type=refresh_token' \
+            --data-urlencode "refresh_token=${PEBBLE_FIREBASE_REFRESH_TOKEN}")"
+          ID_TOKEN="$(python3 -c 'import json, sys; print(json.load(sys.stdin)["id_token"])' <<< "$RESPONSE")"
+          echo "id_token=$ID_TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to Pebble App Store
+        env:
+          PEBBLE_FIREBASE_ID_TOKEN: ${{ steps.pebble-token.outputs.id_token }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          pebble publish \
+            --non-interactive \
+            --is-published \
+            --no-gif-all-platforms \
+            --firebase-id-token "$PEBBLE_FIREBASE_ID_TOKEN" \
+            --name "RunCat for Pebble" \
+            --version "$TAG_NAME" \
+            --description "$(cat appstore/description.txt)" \
+            --source "https://github.com/$GITHUB_REPOSITORY" \
+            --category "watchfaces" \
+            --icon-small appstore/icon-small.png \
+            --icon-large appstore/icon-large.png \
+            --screenshots appstore/emery_screenshot.png appstore/basalt_screenshot.png \
+            --replace-screenshots
+
       - name: Create GitHub release with generated notes
         env:
           GH_TOKEN: ${{ github.token }}
