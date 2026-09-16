@@ -2,7 +2,7 @@
 
 enum {
   DEFAULT_CAT_INTERVAL_MS = 350,
-  CAT_MIN_INTERVAL_MS = 100,
+  CAT_MIN_INTERVAL_MS = 50,
   CAT_MAX_INTERVAL_MS = 450,
 };
 
@@ -18,12 +18,12 @@ static Watchface *s_watchface;
 
 static uint32_t animation_interval_for_bpm(int bpm) {
   if (bpm <= 0) return DEFAULT_CAT_INTERVAL_MS;
-  if (bpm < 60) return 450;
+  if (bpm < 60) return CAT_MAX_INTERVAL_MS;
   if (bpm < 80) return 350;
-  if (bpm < 100) return 260;
-  if (bpm < 120) return 200;
-  if (bpm < 150) return 140;
-  return 100;
+  if (bpm < 100) return 250;
+  if (bpm < 120) return 140;
+  if (bpm < 150) return 80;
+  return CAT_MIN_INTERVAL_MS;
 }
 
 static void draw_heart_icon(Layer *layer, GContext *ctx) {
