@@ -22,6 +22,35 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set app version from tag
+        id: version
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${TAG_NAME#v}"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "Tag '$TAG_NAME' is not a version number like 1.2.3" >&2
+            exit 1
+          fi
+          python3 - "$VERSION" <<'PY'
+          import json
+          import re
+          import sys
+
+          version = sys.argv[1]
+          with open('package.json') as f:
+              source = f.read()
+          patched, count = re.subn(r'("version"\s*:\s*)"[^"]*"',
+                                   lambda m: m.group(1) + '"%s"' % version,
+                                   source, count=1)
+          if count != 1:
+              sys.exit('no version field found in package.json')
+          json.loads(patched)
+          with open('package.json', 'w') as f:
+              f.write(patched)
+          PY
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Install Pebble build dependencies
         run: |
           sudo apt-get update
@@ -56,7 +85,7 @@ jobs:
       - name: Publish to Pebble App Store
         env:
           PEBBLE_FIREBASE_ID_TOKEN: ${{ steps.pebble-token.outputs.id_token }}
-          TAG_NAME: ${{ github.ref_name }}
+          APP_VERSION: ${{ steps.version.outputs.version }}
         run: |
           pebble publish \
             --non-interactive \
@@ -64,7 +93,7 @@ jobs:
             --no-gif-all-platforms \
             --firebase-id-token "$PEBBLE_FIREBASE_ID_TOKEN" \
             --name "RunCat for Pebble" \
-            --version "$TAG_NAME" \
+            --version "$APP_VERSION" \
             --description "$(cat appstore/description.txt)" \
             --source "https://github.com/$GITHUB_REPOSITORY" \
             --category "watchfaces" \
