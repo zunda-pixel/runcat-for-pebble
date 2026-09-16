@@ -1,7 +1,7 @@
 {
   "name": "runcat-for-pebble",
   "author": "zunda-pixel",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "keywords": ["pebble-app"],
   "private": true,
   "dependencies": {},
