@@ -111,6 +111,5 @@ jobs:
           test -n "$PBW_PATH"
           gh release create "$TAG_NAME" \
             --repo "$GITHUB_REPOSITORY" \
-            --title "RunCat for Pebble $TAG_NAME" \
             --generate-notes \
             "$PBW_PATH"
