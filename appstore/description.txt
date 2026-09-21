@@ -1,4 +1,4 @@
-RunCat for Pebble
+RunCat
 
 A playful watchface where the official RunCat runs faster as your heart rate rises.
 

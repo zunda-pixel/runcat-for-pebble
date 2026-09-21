@@ -92,7 +92,7 @@ jobs:
             --is-published \
             --no-gif-all-platforms \
             --firebase-id-token "$PEBBLE_FIREBASE_ID_TOKEN" \
-            --name "RunCat for Pebble" \
+            --name "RunCat" \
             --version "$APP_VERSION" \
             --description "$(cat appstore/description.txt)" \
             --source "https://github.com/$GITHUB_REPOSITORY" \
